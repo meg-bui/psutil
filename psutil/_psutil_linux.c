@@ -50,7 +50,7 @@ static const int NCPUS_START = sizeof(unsigned long) * CHAR_BIT;
 
 #include "_psutil_common.h"
 #include "_psutil_posix.h"
-#include "arch/osx/cpu.h"
+#include "arch/osx/cpu.c"
 
 // May happen on old RedHat versions, see:
 // https://github.com/giampaolo/psutil/issues/607
