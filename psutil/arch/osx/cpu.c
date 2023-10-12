@@ -122,7 +122,7 @@ psutil_cpu_freq(PyObject *self, PyObject *args) {
         "IKK",
         1,
         2,
-        3;
+        3);
 }
 //PyObject *
 //psutil_cpu_freq(PyObject *self, PyObject *args) {
