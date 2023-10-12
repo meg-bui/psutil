@@ -495,6 +495,17 @@ error:
 }
 
 
+static PyObject *
+psutil_cpu_freq(PyObject *self, PyObject *args) {
+
+    return Py_BuildValue(
+        "IKK",
+        7,
+        8,
+        9);
+}
+
+
 /*
  * Module init.
  */
@@ -514,6 +525,7 @@ static PyMethodDef mod_methods[] = {
     {"disk_partitions", psutil_disk_partitions, METH_VARARGS},
     {"users", psutil_users, METH_VARARGS},
     {"net_if_duplex_speed", psutil_net_if_duplex_speed, METH_VARARGS},
+    {"cpu_freq", psutil_cpu_freq, METH_VARARGS},
 
     // --- linux specific
     {"linux_sysinfo", psutil_linux_sysinfo, METH_VARARGS},
