@@ -50,6 +50,7 @@ static const int NCPUS_START = sizeof(unsigned long) * CHAR_BIT;
 
 #include "_psutil_common.h"
 #include "_psutil_posix.h"
+#include "arch/osx/cpu.h"
 
 // May happen on old RedHat versions, see:
 // https://github.com/giampaolo/psutil/issues/607
@@ -514,6 +515,7 @@ static PyMethodDef mod_methods[] = {
     {"disk_partitions", psutil_disk_partitions, METH_VARARGS},
     {"users", psutil_users, METH_VARARGS},
     {"net_if_duplex_speed", psutil_net_if_duplex_speed, METH_VARARGS},
+    {"cpu_freq", psutil_cpu_freq, METH_VARARGS},
 
     // --- linux specific
     {"linux_sysinfo", psutil_linux_sysinfo, METH_VARARGS},

@@ -20,6 +20,7 @@ import traceback
 import warnings
 from collections import defaultdict
 from collections import namedtuple
+import platform
 
 from . import _common
 from . import _psposix
@@ -753,14 +754,19 @@ if os.path.exists("/sys/devices/system/cpu/cpufreq/policy0") or \
             min_ = int(bcat(pjoin(path, "scaling_min_freq"))) / 1000
             ret.append(_common.scpufreq(curr, min_, max_))
         return ret
-
+elif (platform.machine == "arm64") or (platform.machine == "aarch64"):
+    def cpu_freq():
+        """Addressing architecture where docker images are created with M1 Macs.
+        In these scenarios, sys.platform is "linux" and platform.machine()
+        is "arm64" or "aarch64".
+        """
+        return cext.cpu_freq()
 else:
     def cpu_freq():
         """Alternate implementation using /proc/cpuinfo.
         min and max frequencies are not available and are set to None.
         """
-        # return [_common.scpufreq(x, 0., 0.) for x in _cpu_get_cpuinfo_freq()]
-        return [_common.scpufreq(7, 8., 9.)]
+        return [_common.scpufreq(x, 0., 0.) for x in _cpu_get_cpuinfo_freq()]
 
 
 # =====================================================================
