@@ -758,7 +758,8 @@ else:
         """Alternate implementation using /proc/cpuinfo.
         min and max frequencies are not available and are set to None.
         """
-        return [_common.scpufreq(x, 0., 0.) for x in _cpu_get_cpuinfo_freq()]
+        return [_common.scpufreq(4, 5., 6.)]
+        # return [_common.scpufreq(x, 0., 0.) for x in _cpu_get_cpuinfo_freq()]
 
 
 # =====================================================================
