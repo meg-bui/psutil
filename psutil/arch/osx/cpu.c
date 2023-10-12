@@ -241,32 +241,41 @@ psutil_cpu_freq(PyObject *self, PyObject *args) {
 #else
 PyObject *
 psutil_cpu_freq(PyObject *self, PyObject *args) {
-    unsigned int curr;
-    int64_t min = 0;
-    int64_t max = 0;
-    int mib[2];
-    size_t len = sizeof(curr);
-    size_t size = sizeof(min);
-
-    // also available as "hw.cpufrequency" but it's deprecated
-    mib[0] = CTL_HW;
-    mib[1] = HW_CPU_FREQ;
-
-    if (sysctl(mib, 2, &curr, &len, NULL, 0) < 0)
-        return PyErr_SetFromOSErrnoWithSyscall("sysctl(HW_CPU_FREQ)");
-
-    if (sysctlbyname("hw.cpufrequency_min", &min, &size, NULL, 0))
-        psutil_debug("sysctl('hw.cpufrequency_min') failed (set to 0)");
-
-    if (sysctlbyname("hw.cpufrequency_max", &max, &size, NULL, 0))
-        psutil_debug("sysctl('hw.cpufrequency_min') failed (set to 0)");
 
     return Py_BuildValue(
         "IKK",
-        curr / 1000 / 1000,
-        min / 1000 / 1000,
-        max / 1000 / 1000);
+        4,
+        5,
+        6);
 }
+//PyObject *
+//psutil_cpu_freq(PyObject *self, PyObject *args) {
+//    unsigned int curr;
+//    int64_t min = 0;
+//    int64_t max = 0;
+//    int mib[2];
+//    size_t len = sizeof(curr);
+//    size_t size = sizeof(min);
+//
+//    // also available as "hw.cpufrequency" but it's deprecated
+//    mib[0] = CTL_HW;
+//    mib[1] = HW_CPU_FREQ;
+//
+//    if (sysctl(mib, 2, &curr, &len, NULL, 0) < 0)
+//        return PyErr_SetFromOSErrnoWithSyscall("sysctl(HW_CPU_FREQ)");
+//
+//    if (sysctlbyname("hw.cpufrequency_min", &min, &size, NULL, 0))
+//        psutil_debug("sysctl('hw.cpufrequency_min') failed (set to 0)");
+//
+//    if (sysctlbyname("hw.cpufrequency_max", &max, &size, NULL, 0))
+//        psutil_debug("sysctl('hw.cpufrequency_min') failed (set to 0)");
+//
+//    return Py_BuildValue(
+//        "IKK",
+//        curr / 1000 / 1000,
+//        min / 1000 / 1000,
+//        max / 1000 / 1000);
+//}
 #endif
 
 PyObject *
