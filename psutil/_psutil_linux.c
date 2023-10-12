@@ -51,13 +51,8 @@ static const int NCPUS_START = sizeof(unsigned long) * CHAR_BIT;
 #include "_psutil_common.h"
 #include "_psutil_posix.h"
 
-#include <mach/mach_error.h>
-#include <mach/mach_host.h>
-#include <mach/mach_port.h>
-#include <mach/mach_vm.h>
-#include <sys/sysctl.h>
-#include <sys/vmmeter.h>
-#include <mach/mach.h>
+#include <sys/proc.h>
+#include <netinet/tcp_fsm.h>
 #include "arch/osx/cpu.h"
 
 // May happen on old RedHat versions, see:
